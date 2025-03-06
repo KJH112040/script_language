@@ -8,7 +8,8 @@ for _ in range(n):
 for _ in range(m):
     mp.add(input())
 
-nmp = np&mp
+nmp = list(np&mp)
+nmp.sort()
 print(len(nmp))
 for p in nmp:
     print(p)
