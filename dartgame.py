@@ -30,6 +30,7 @@ def solution(dartResult):
             answer -= current
             current *= -1
             answer+=current
+    return answer
 
 dr = input()
 print(solution(dr))
