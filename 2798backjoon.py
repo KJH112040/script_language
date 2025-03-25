@@ -12,3 +12,13 @@ for i in total:
             result=i
 
 print(result)
+
+#교수님 코드==============
+#from itertools import combinations
+#N,M = map(int,input().split())
+#cards = list(map(int,input().split()))
+#maximum = 0
+#for c in combinations(cards,3):
+#   if sum(c)<=M:
+#       maximum = max(maximum,sum(c))
+#print(maximum)
