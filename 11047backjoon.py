@@ -16,3 +16,15 @@ for _ in range(N):
 
 count_coin(len(coin)-1)
 print(cnt)
+
+#교수님 코드=======
+#N,K = map(int,input().split())
+#coins = [int(input()) for _ in range(N)]
+#coins.reverse()
+#result = 0
+#for coin in coins:
+#   result += K // coin
+#   K %= coin
+#   if K == 0:
+#       break
+#print(result)
