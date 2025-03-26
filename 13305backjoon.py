@@ -61,6 +61,13 @@ for driving in range(city-1):
 total_cost += km*low_cost
 print(total_cost)
 
+#내 코드 문제점================
+# 4
+# 1 1 5
+# 4 7 2 3
+# 입력 시 정답: 18, 코드 출력: 21
+# 현재 도시의 주유소보다 싼 주유소가 앞에 있다면, 그 주유소가 최소가 아니더라도 그걸 사용하는 게 이득일 수 있습니다.
+
 #교수님 코드==============
 #N = int(input())
 #edges = list(map(int,input().split()))
