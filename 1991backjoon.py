@@ -36,49 +36,63 @@
 # ABDCEFG
 # DBAECFG
 # DBEGFCA
-# N = int(input())            # 노드의 개수
-# binary_tree = {}            # 트리는 사전으로 구성, key:value = 노드:[왼쪽 자식, 오른쪽 자시]
-# preorder_traverse = []
-# inorder_traverse = []
-# postorder_traverse = []
-#
-# for _ in range(N):
-#     root, left, right = map(int,input().split())
-#     binary_tree[root]  = {'Left':left, 'Right':right}
-#
-# root = 'A'
-# while True:
-#     preorder_traverse.append(root)
-#     if
-#
-#=====교수님 코드=======
 def preorder(node):
-    if node != '.':     # 노드가 null이 아니면
+    if node != '.':
         print(node,end='')
-        preorder(binary_tree[node][0])      # 왼쪽 서브 트리 순회
-        preorder(binary_tree[node][1])      # 오른쪽 서브 트리 순회
-
+        preorder(node['Left'])
+        preorder(node['Right'])
 def inorder(node):
-    if node != '.':     # 노드가 null이 아니면
-        inorder(binary_tree[node][0])      # 왼쪽 서브 트리 순회
-        print(node,end='')
-        inorder(binary_tree[node][1])      # 오른쪽 서브 트리 순회
-
+    if node != '.':
+        inorder(node['Left'])
+        print(node, end='')
+        inorder(node['Right'])
 def postorder(node):
-    if node != '.':     # 노드가 null이 아니면
-        postorder(binary_tree[node][0])  # 왼쪽 서브 트리 순회
-        postorder(binary_tree[node][1])  #   오른쪽 서브 트리 순회
-        print(node,end='')
+    if node != '.':
+        postorder(node['Left'])
+        postorder(node['Right'])
+        print(node, end='')
 
 N = int(input())            # 노드의 개수
-binary_tree = {}            # 트리는 사전으로 구성, key:value = 노드:[왼쪽 자식, 오른쪽 자식]
+binary_tree = {}            # 트리는 사전으로 구성, key:value = 노드:[왼쪽 자식, 오른쪽 자시]
 
-for _ in range(N):          # N개 노드 읽기
-    node,left,right = input().split()       # ['A','B','C']
-    binary_tree[node] = [left,right]        # 사전에 노드 정보 삽입
+for _ in range(N):
+    root, left, right = input().split()
+    binary_tree[root]  = {'Left':left, 'Right':right}
 
-preorder('A')       # 전위 순회
+preorder('A')
 print()
-inorder('A')        # 중위 순회
+inorder('A')
 print()
-postorder('A')      # 후위 순회
+postorder('A')
+
+#=====교수님 코드=======
+# def preorder(node):
+#     if node != '.':     # 노드가 null이 아니면
+#         print(node,end='')
+#         preorder(binary_tree[node][0])      # 왼쪽 서브 트리 순회
+#         preorder(binary_tree[node][1])      # 오른쪽 서브 트리 순회
+#
+# def inorder(node):
+#     if node != '.':     # 노드가 null이 아니면
+#         inorder(binary_tree[node][0])      # 왼쪽 서브 트리 순회
+#         print(node,end='')
+#         inorder(binary_tree[node][1])      # 오른쪽 서브 트리 순회
+#
+# def postorder(node):
+#     if node != '.':     # 노드가 null이 아니면
+#         postorder(binary_tree[node][0])  # 왼쪽 서브 트리 순회
+#         postorder(binary_tree[node][1])  #   오른쪽 서브 트리 순회
+#         print(node,end='')
+#
+# N = int(input())            # 노드의 개수
+# binary_tree = {}            # 트리는 사전으로 구성, key:value = 노드:[왼쪽 자식, 오른쪽 자식]
+#
+# for _ in range(N):          # N개 노드 읽기
+#     node,left,right = input().split()       # ['A','B','C']
+#     binary_tree[node] = [left,right]        # 사전에 노드 정보 삽입
+#
+# preorder('A')       # 전위 순회
+# print()
+# inorder('A')        # 중위 순회
+# print()
+# postorder('A')      # 후위 순회
