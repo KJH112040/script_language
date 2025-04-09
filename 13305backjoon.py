@@ -76,7 +76,7 @@ print(total_cost)
 #cur = 0        # 검사 도시
 #answer = 0     # 비용
 #while cur != N-1:  # 검사 도시가 마지막 도시가 아니라면 계속
-#   for i in range(start, N-1): i = start, start + 1, ... , N-1
+#   for i in range(start, N-1): # i = start, start + 1, ... , N-1
 #       if costs[i] >= costs[start]:    # 검사도시 주유비가 start 주유비보다 크거나 같다면
 #           answer += costs[start] * edges[i]
 #           cur = i + 1                 # 검사도시 i + 1로 변경
