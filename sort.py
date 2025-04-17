@@ -58,3 +58,15 @@
 # 중복 데이터가 여러 개일 때 효과적이나 메모리 낭비가 심함
 #
 #============================================================
+n,k = map(int,input().split())
+a = list(map(int,input().split()))
+b = list(map(int,input().split()))
+a.sort()    # 오름차순 정렬
+b.sort(reverse=True)    # 내림차순 정렬
+# 첫번째 인덱스부터 확인해서 a원소가 b원소보다 작을 때 교환
+for i in range(k):
+    if a[i]<b[i]:
+        a[i], b[i] = b[i],a[i]
+    else:
+        break
+print(sum(a))
