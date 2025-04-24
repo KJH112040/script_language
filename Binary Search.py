@@ -47,24 +47,43 @@
 # print(count_by_range(a,-1,3))
 #
 #==================================================================================
-# n 떡의 개수, m 손님이 요청한 떡길이
-n,m = map(int,input().split())
-# 떡 배열
+# # n 떡의 개수, m 손님이 요청한 떡길이
+# n,m = map(int,input().split())
+# # 떡 배열
+# array = list(map(int,input().split()))
+# start = 0
+# end = 1000000000
+# # 조건을 만족하는 절단기 최대 높이
+# result = 0
+# # 이분 탐색
+# while start<= end:
+#     mid = (start+end)//2
+#     total = 0       # 자르고 남은 떡길이 변수
+#     for x in array:
+#         if x > mid:
+#             total += x - mid
+#     if total< m:        # 조건을 만족하지 않는다.
+#         end = mid - 1
+#     else:               # 조건을 만족
+#         result = mid    # 정답 후보
+#         start = mid + 1
+# print(result)
+#
+#==================================================================================
+# 오름차순 정렬되어 있는 수열서 x값의 개수를 출력한다.
+# 선형탐색은 시간초과라면 이분탐색
+from bisect import bisect_left,bisect_right
+
+# array 수열에서 [left,right] 범위의 개수를 알려준다.
+def count_by_range(array,left,right):
+    return bisect_right(array,right) - bisect_left(array,left)
+
+# n데이터 개수, x 찾고자 하는 값
+n,x = map(int,input().split())
 array = list(map(int,input().split()))
-start = 0
-end = 1000000000
-# 조건을 만족하는 절단기 최대 높이
-result = 0
-# 이분 탐색
-while start<= end:
-    mid = (start+end)//2
-    total = 0       # 자르고 남은 떡길이 변수
-    for x in array:
-        if x > mid:
-            total += x - mid
-    if total< m:        # 조건을 만족하지 않는다.
-        end = mid - 1
-    else:               # 조건을 만족
-        result = mid    # 정답 후보
-        start = mid + 1
-print(result)
+# 수열에 x가 몇 개 인가?
+count = count_by_range(array,x,x)
+if count == 0:
+    print(-1)
+else:
+    print(count)
