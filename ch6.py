@@ -101,34 +101,50 @@
 # else:
 #     print(dp[M])
 #==========================================================================
-# nxm 금광에서 최대 금획득량을 얻고자 한다.
-# array[i][j]: i행 j열 금광양
-# dp[i][j]: i행 j열까지 올 때 캔 최대 금광양
-# dp[i][j] = array[i][j] + max(dp[i-1][j-1],dp[i][j-1],dp[i+1][j-1])
-# 테스트 케이스 입력받고 반복문
-for tc in range(int(input())):
-    # 금광 정보 입력
-    n,m = map(int,input().split())
-    array = list(map(int,input().split()))
-    # 다이나믹 프로그래밍을 위한 dp 테이블
-    dp = []
-    index = 0
-    for i in range(n):      # n행에 대해서
-        dp.append(array[index:index+m])
-        index += m
-    # 다이나믹 프로그래밍
-    for j in range(1,m):    # 1열부터 m-1열 까지 진행
-        for i in range(n):  # dp[i][j]를 갱신하려고 한다.
-            # 왼쪽 위
-            if i==0: left_up = 0
-            else:    left_up = dp[i-1][j-1]
-            # 왼쪽 아래
-            if i==n-1: left_down = 0
-            else:      left_down = dp[i+1][j-1]
-            # 왼쪽
-            left = dp[i][j-1]
-            dp[i][j] += max(left_up,left,left_down)
-    result = 0
-    for i in range(n):
-        result = max(result, dp[i][m-1])
-    print(result)
+# # nxm 금광에서 최대 금획득량을 얻고자 한다.
+# # array[i][j]: i행 j열 금광양
+# # dp[i][j]: i행 j열까지 올 때 캔 최대 금광양
+# # dp[i][j] = array[i][j] + max(dp[i-1][j-1],dp[i][j-1],dp[i+1][j-1])
+# # 테스트 케이스 입력받고 반복문
+# for tc in range(int(input())):
+#     # 금광 정보 입력
+#     n,m = map(int,input().split())
+#     array = list(map(int,input().split()))
+#     # 다이나믹 프로그래밍을 위한 dp 테이블
+#     dp = []
+#     index = 0
+#     for i in range(n):      # n행에 대해서
+#         dp.append(array[index:index+m])
+#         index += m
+#     # 다이나믹 프로그래밍
+#     for j in range(1,m):    # 1열부터 m-1열 까지 진행
+#         for i in range(n):  # dp[i][j]를 갱신하려고 한다.
+#             # 왼쪽 위
+#             if i==0: left_up = 0
+#             else:    left_up = dp[i-1][j-1]
+#             # 왼쪽 아래
+#             if i==n-1: left_down = 0
+#             else:      left_down = dp[i+1][j-1]
+#             # 왼쪽
+#             left = dp[i][j-1]
+#             dp[i][j] += max(left_up,left,left_down)
+#     result = 0
+#     for i in range(n):
+#         result = max(result, dp[i][m-1])
+#     print(result)
+#============================================================================
+n = int(input())
+array = list(map(int,input().split()))
+# 순서를 뒤집는다. LIS문제로 전환
+array.reverse()
+# dp 체이블 1로 초기화
+# dp[i] : arrau[i]를 끝원소로 갖는 LIS 길이
+# dp[i] = max(dp[i],dp[j]+1) if array[j] < array[i] (0<=j<=i)
+dp = [1] * n
+# 가장 긴 증가하는 부분 수열 (LIS) 알고리즘
+for i in range(1,n):    # i = 1,2,...,n-1
+    for j in range(i):  # j = 0,1,...,i-1
+        if array[j]<array[i]:
+            dp[i] = max(dp[i],dp[j]+1)
+# 열외해야 하는 최소 병사 수
+print(n - max(dp))
