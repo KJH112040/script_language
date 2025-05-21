@@ -163,3 +163,116 @@
 # start부터 목적지까지 찾아주는 알고리즘. 다익스트라 알고리즘과 유사
 # 휴리스틱 이용
 #====================================================================
+# 문제: 전보
+# import heapq
+# import sys
+# input = sys.stdin.readline
+# INF = int(1e9)  # 무한대
+#
+# # 노드 개수, 간선 개수, 시작 도시
+# N,M,start = map(int,input().split())
+# # 연결 그래프 2차원 노드
+# graph = [[]for _ in range(N+1)]
+# # 최단 거리 테이블 무한대로 초기화
+# distance = [INF]*(N+1)
+# # 간선 정보 입력
+# for _ in range(M):
+#     X,Y,Z = map(int,input().split())
+#     graph[X].append((Y,Z))
+#
+# def dijkstra(start):
+#     q=[]
+#     # 시작노드 최단거리는 0
+#     distance[start] = 0
+#     # 우선순위큐(최소힙)에 (0,start) 삽입
+#     heapq.heappush(q,(0,start))
+#     while q:        # q가 비어있지 않다면 계속
+#         dist, now = heapq.heappop(q)
+#         # 이미 처리된 노드인지 확인
+#         if distance[now]<dist:
+#             continue
+#         # 현재노드(now)의 이웃노드 확인
+#         for adjacent, weight in graph[now]:
+#             cost = dist + weight    # 현재노드(now)를 거쳐서 adjacent로 가는 비용
+#             if cost<distance[adjacent]:
+#                 distance[adjacent] = cost
+#                 heapq.heappush(q,(cost,adjacent))
+# # 다익스트라 알고리즘 수행
+# dijkstra(start)
+# # 전보를 받은 도시 개수
+# count = 0
+# # 가장 큰 최단거리
+# max_distance = 0
+# for i in range(1,N+1):
+#     if distance[i] != INF and i!=start:
+#         count += 1
+#         max_distance = max(max_distance, distance[i])
+# print(count,max_distance)
+# 입력
+# 3 2 1
+# 1 2 4
+# 1 3 2
+# 출력
+# 2 4
+#====================================================================================
+# 플로이드 워셜
+# INF = int(1e9)  # 무한대
+# # 노드 개수, 간선개수
+# N,M = map(int,input().split())
+# # 2차원 최단 거리 테이블 초기화
+# distance = [[INF]*(N+1) for _ in range(N+1)]
+# # [[INF,INF,...],[INF,INF,...],...,[INF,INF,...]]
+# # 자기 자신으로 가는 최단거리는 0으로 설정
+# for a in range(1,N+1):
+#     distance[a][a] = 0
+# # 간선의 정보를 최단 거리 테이블 설정
+# for _ in range(M):
+#     A,B,C = map(int,input().split())
+#     distance[A][B] = C
+# # 점화식 D[a][b] = min(D[a][b],D[a][k] + D[k][b])
+# for k in range(1,N+1):
+#     for a in range(1,N+1):
+#         for b in range(1,N+1):
+#             distance[a][b] = min(distance[a][b],distance[a][k]+distance[k][b])
+#=====================================================================================
+# 문제: 미래 도시
+# INF = int(1e9)      # 무한대
+# # 노드 개수, 간선 개수
+# n, m = map(int,input().split())
+# # 2차원 리스트 무한대 초기화
+# distance = [[INF]*(n+1) for _ in range(n+1)]
+# # 자기 자신에게 가는 거리 0 초기화
+# for a in range(1,n+1):
+#     distance[a][a] = 0
+# # 간선의 정보를 입력 받아서 최단 거리 초기화
+# for _ in range(m):
+#     A,B = map(int,input().split())
+#     distance[A][B] = 1
+#     distance[B][A] = 1
+# # 1 -> k -> x 비용
+# # x, k 입력받기
+# x, k = map(int,input().split())
+# for k in range(1,n+1):
+#     for a in range(1,n+1):
+#         for b in range(1,n+1):
+#             distance[a][b] = min(distance[a][b],distance[a][k]+distance[k][b])
+#
+# result = distance[1][k]+distance[k][x]
+#
+# if result>=INF:
+#     print("INF")
+# else:
+#     print(result)
+# 입력
+# 5 7
+# 1 2
+# 1 3
+# 1 4
+# 2 4
+# 3 4
+# 3 5
+# 4 5
+# 4 5
+# 출력
+# 3
+#===========================================================================================
