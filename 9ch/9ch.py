@@ -32,20 +32,44 @@
 # isPrime으로 하나 하나 판별하면 시간 초과에 걸린다.
 #===============================================================
 # 특정한 합을 가지는 부분연속수열 찾기
-n = 5 # 데이터 개수
-m = 5 # 찾고자 하는 부분합
-data = [1,2,3,4,5] # 전체 수열
-count = 0
-interval_sum = 0
-end = 0
-# start를 차례로 증가시키며 반복
-for start in range(n): # start = 0, 1, ... , n-1
-    # end를 가능한 만큼 이동
-    while interval_sum < m and end < n:
-        interval_sum += data[end]
-        end += 1
-    # 부분합이 m이면 count를 증가
-    if interval_sum == m:
-        count += 1
-    interval_sum -= data[start]
-print(count)
+# n = 5 # 데이터 개수
+# m = 5 # 찾고자 하는 부분합
+# data = [1,2,3,4,5] # 전체 수열
+# count = 0
+# interval_sum = 0
+# end = 0
+# # start를 차례로 증가시키며 반복
+# for start in range(n): # start = 0, 1, ... , n-1
+#     # end를 가능한 만큼 이동
+#     while interval_sum < m and end < n:
+#         interval_sum += data[end]
+#         end += 1
+#     # 부분합이 m이면 count를 증가
+#     if interval_sum == m:
+#         count += 1
+#     interval_sum -= data[start]
+# print(count)
+#===========================================================
+# 데이터의 개수 N과 데이터 입력
+n = 5
+data = [10,20,30,40,50]
+# 접두사 합(prefix sum) 배열 계산
+# 점화식
+# prefix_sum[i] = prefix_sum[i-1] + data[i]
+sum_value = 0
+prefix_sum = [0]
+for i in data:
+    sum_value += i
+    prefix_sum.append(sum_value)
+# prefix_sum = [0,10,30,60,100,150]
+# 구간 합 계산
+left = 3
+right = 4
+for left,right in [(3,4),(2,5),(1,4),(1,5)]:
+    print(prefix_sum[right] - prefix_sum[left-1])
+    # 출력결과
+    # 70
+    # 140
+    # 100
+    # 150
+#========================================================
